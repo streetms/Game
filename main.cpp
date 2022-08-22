@@ -21,6 +21,5 @@ int main()
         window.draw(hero.Sprite());
         window.display();
     }
-
     return 0;
 }

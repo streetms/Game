@@ -4,8 +4,8 @@
 
 #ifndef GAME_BLOCK_H
 #define GAME_BLOCK_H
-
-class Block {
+#include "Object.h"
+class Block : public Object {
 
 };
 
