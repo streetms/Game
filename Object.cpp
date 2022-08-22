@@ -1,7 +1,7 @@
 //
 // Created by konstantin on 21.08.22.
 //
-
+#include <QFile>
 #include "Object.h"
 #include "utility.h"
 std::map<std::string_view,sf::Texture> Object::textures;
@@ -10,12 +10,16 @@ void Object::fell() {
 
 }
 
+
+
 Object::Object(std::string_view path){
-    if (textures.find(path) == textures.end()) {
-        textures.emplace(path,load_texture_from_file(path));
+    if (not path.empty()) {
+        if (textures.find(path) == textures.end()) {
+            textures.emplace(path, load_texture_from_file(path));
+        }
+        texture_ = &((*(textures.find(path))).second);
+        sprite.setTexture(*texture_);
     }
-    texture = &((*(textures.find(path))).second);
-    sprite.setTexture(*texture);
 }
 
 bool Object::is_weighty() {
@@ -45,4 +49,12 @@ void Object::set_speed(float speed) {
 
 float Object::Speed(){
     return speed_;
+}
+
+void Object::add_texture(std::string_view path) {
+    textures.emplace(path, load_texture_from_file(path));
+}
+
+const sf::Texture &Object::get_texture(std::string_view path) {
+    return textures.find(path)->second;
 }

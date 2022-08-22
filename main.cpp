@@ -8,6 +8,8 @@ constexpr static int HEIGHT = 720;
 
 int main()
 {
+    Object::add_texture(":/images/fireball.png");
+    Object::add_texture(":/images/iceArrow.png");
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Game");
     Hero hero(":/images/wizard.png");
     hero.set_position(24,48);

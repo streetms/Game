@@ -31,6 +31,7 @@ public:
     void update() override;
     std::pair <int,int> Size() override;
     std::forward_list<std::unique_ptr<Projectile>>& Projectiles();
+    void shot(Projectile::Type type);
 };
 
 

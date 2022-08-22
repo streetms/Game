@@ -6,7 +6,8 @@
 #define GAME_BLOCK_H
 #include "Object.h"
 class Block : public Object {
-
+    Block(std::string_view path);
+    Block();
 };
 
 

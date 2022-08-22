@@ -3,3 +3,12 @@
 //
 
 #include "Block.h"
+
+Block::Block(std::string_view path) : Object(path) {
+
+}
+
+Block::Block() : Object(""){
+    solid = true;
+
+}

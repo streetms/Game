@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>images/wizard.png</file>
         <file>images/fireball.png</file>
+        <file>images/iceArrow.png</file>
     </qresource>
 </RCC>

@@ -3,7 +3,6 @@
 //
 
 #include "Hero.h"
-#include "utility.h"
 Hero::Hero(std::string_view path) : Object(path){
     sprite.setOrigin(sprite_width/2,sprite_height/2);
     life = true;
@@ -37,8 +36,11 @@ void Hero::update() {
         sprite.setPosition(_x,_y);
         state = State::move_right;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        projectiles.push_front(std::make_unique<Projectile>(":/images/fireball.png",this));
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
+       this->shot(Projectile::Type::fireball);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) {
+        this->shot(Projectile::Type::iceArrow);
     }
 }
 
@@ -48,6 +50,10 @@ std::forward_list<std::unique_ptr<Projectile>> &Hero::Projectiles() {
 
 std::pair<int, int> Hero::Size() {
     return {sprite_width,sprite_height};
+}
+
+void Hero::shot(Projectile::Type type) {
+    projectiles.push_front(std::make_unique<Projectile>(type,this));
 }
 
 

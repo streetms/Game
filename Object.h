@@ -7,12 +7,12 @@
 #include <string_view>
 #include <SFML/Graphics.hpp>
 #include <map>
-#include <iostream>
 class Object {
 private:
+    sf::Texture* texture_;
     static std::map<std::string_view,sf::Texture> textures;
-    sf::Texture* texture;
 protected:
+    const sf::Texture& get_texture(std::string_view path);
     bool solid;
     bool weighty;
     bool vulnerability;
@@ -22,8 +22,9 @@ protected:
     float speed_ = 0;
     explicit Object (std::string_view path);
 public:
-    const int sprite_width = 32;
-    const int sprite_height = 32;
+    static void add_texture(std::string_view path);
+    const int sprite_width = 48;
+    const int sprite_height = 48;
     enum class State {move_left,move_right};
     State state;
     virtual void update() = 0;
