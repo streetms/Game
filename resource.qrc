@@ -3,5 +3,7 @@
         <file>images/wizard.png</file>
         <file>images/fireball.png</file>
         <file>images/iceArrow.png</file>
+        <file>images/wall.png</file>
+        <file>levels/level1</file>
     </qresource>
 </RCC>

@@ -4,9 +4,27 @@
 
 #include "Block.h"
 
-Block::Block(std::string_view path) : Object(path) {
+
+Block::Block() : Object(){
+    sprite.setOrigin(sprite_width/2,sprite_height/2);
+}
+
+void Block::update() {
 
 }
 
-Block::Block(){
+Block::Block(char ch) : Block(){
+    *this = ch;
+}
+Block::Block(const Block& other) : Block(){
+
+}
+void Block::operator=(const char ch) {
+    switch (ch) {
+        case '#' :
+            sprite.setTexture(get_texture(":/images/wall.png"));
+            solid = true;
+            destructible = true;
+            break;
+    }
 }
