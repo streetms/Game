@@ -9,13 +9,10 @@
 #include <memory>
 #include "Object.h"
 #include "Projectile.h"
-class Hero : public Object{
+#include "Creature.h"
+class Hero : public Creature {
 private:
-    std::forward_list<std::unique_ptr<Projectile>> projectiles;
-    int height;
-    int max_height;
-    bool life;
-    float current_frame;
+
     std::array<sf::Rect<int>,11> move_right_frame= { sf::Rect(50,885,156,128),sf::Rect(210,885,150,128),sf::Rect(380,885,150,128),
                                                     sf::Rect(555,885,156,128),sf::Rect(736,885,156,128),sf::Rect(923,885,156,128),
                                                     sf::Rect(1105,885,156,128),sf::Rect(1280,885,156,128),sf::Rect(1465,885,156,128),
@@ -30,8 +27,6 @@ public:
     explicit Hero(std::string_view path);
     void update() override;
     std::pair <int,int> Size() override;
-    std::forward_list<std::unique_ptr<Projectile>>& Projectiles();
-    void shot(Projectile::Type type);
 };
 
 

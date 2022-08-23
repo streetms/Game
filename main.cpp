@@ -1,8 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <chrono>
 #include <thread>
-#include "Hero.h"
-#include "utility.h"
+#include "creatures/Hero.h"
 constexpr static int WIDTH = 1280;
 constexpr static int HEIGHT = 720;
 
@@ -26,7 +25,7 @@ int main()
         hero.update();
         window.clear();
         window.draw(hero.Sprite());
-        draw_projectiles(hero.Projectiles(),window);
+        hero.draw_projectiles(window);
         window.display();
     }
     return 0;

@@ -3,14 +3,15 @@
 //
 #include <QFile>
 #include "Object.h"
-#include "utility.h"
 std::map<std::string_view,sf::Texture> Object::textures;
 
 void Object::fell() {
 
 }
 
-
+Object::State Object::get_state() {
+    return state;
+}
 
 Object::Object(std::string_view path){
     if (not path.empty()) {
@@ -57,4 +58,17 @@ void Object::add_texture(std::string_view path) {
 
 const sf::Texture &Object::get_texture(std::string_view path) {
     return textures.find(path)->second;
+}
+
+Object::Object() {
+
+}
+
+sf::Texture Object::load_texture_from_file(std::string_view path) {
+    sf::Texture texture;
+    QFile file;
+    file.setFileName(path.data());
+    file.open(QIODevice::ReadOnly);
+    texture.loadFromMemory(file.readAll().data(),file.size());
+    return texture;
 }

@@ -1,9 +1,9 @@
 //
 // Created by konstantin on 20.08.22.
 //
-
-#include "Hero.h"
-Hero::Hero(std::string_view path) : Object(path){
+#include <memory>
+#include "creatures/Hero.h"
+Hero::Hero(std::string_view path) : Creature(path){
     sprite.setOrigin(sprite_width/2,sprite_height/2);
     life = true;
     height = 100;
@@ -37,24 +37,15 @@ void Hero::update() {
         state = State::move_right;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
-       this->shot(Projectile::Type::fireball);
+        this->shot(Projectile::Type::fireball);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) {
         this->shot(Projectile::Type::iceArrow);
     }
 }
 
-std::forward_list<std::unique_ptr<Projectile>> &Hero::Projectiles() {
-    return projectiles;
-}
-
 std::pair<int, int> Hero::Size() {
     return {sprite_width,sprite_height};
 }
-
-void Hero::shot(Projectile::Type type) {
-    projectiles.push_front(std::make_unique<Projectile>(type,this));
-}
-
 
 
