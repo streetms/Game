@@ -10,6 +10,7 @@
 #include "Object.h"
 #include "Projectile.h"
 #include "Creature.h"
+#include "Map.h"
 class Hero : public Creature {
 private:
 
@@ -24,7 +25,7 @@ private:
 public:
     const int sprite_width = 48;
     const int sprite_height = 96;
-    explicit Hero(std::string_view path);
+    explicit Hero(Map& map);
     void update() override;
 };
 

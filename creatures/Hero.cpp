@@ -2,7 +2,8 @@
 // Created by konstantin on 20.08.22.
 //
 #include "creatures/Hero.h"
-Hero::Hero(std::string_view path) : Creature(path){
+Hero::Hero(Map& map) : Creature(map) {
+    sprite.setTexture(get_texture(":/images/wizard.png"));
     sprite.setOrigin(sprite_width/2,sprite_height/2);
     life = true;
     height = 100;

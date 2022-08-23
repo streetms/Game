@@ -29,7 +29,6 @@ protected:
     float _y = 0;
     sf::Sprite sprite;
     float speed_ = 0;
-    explicit Object (std::string_view path);
     Object();
 private:
     sf::Texture* texture_;

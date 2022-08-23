@@ -11,15 +11,6 @@ Object::State Object::get_state() const {
 std::pair <int,int> Object::Size() const {
   return {sprite_width,sprite_height};
 }
-Object::Object(std::string_view path){
-    if (not path.empty()) {
-        if (textures.find(path) == textures.end()) {
-            textures.emplace(path, load_texture_from_file(path));
-        }
-        texture_ = &((*(textures.find(path))).second);
-        sprite.setTexture(*texture_);
-    }
-}
 
 std::pair<float, float> Object::Position() const {
     return std::pair{_x,_y};

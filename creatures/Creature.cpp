@@ -3,12 +3,9 @@
 //
 
 #include "creatures/Creature.h"
-Creature::Creature(std::string_view path) : Object(path) {
-
-}
 
 void Creature::shot(Projectile::Type type) {
-    projectiles.push_front({type,this});
+    map_->add_object(new Projectile(type,this));
 }
 
 void Creature::draw_projectiles(sf::RenderWindow& window) {
@@ -25,6 +22,11 @@ void Creature::draw_projectiles(sf::RenderWindow& window) {
             window.draw(t->Sprite());
         }
     }
+}
+
+Creature::Creature(Map &map) {
+    map_ = &map;
+    map.add_object(this);
 }
 
 

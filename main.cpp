@@ -11,12 +11,14 @@ int main()
     Object::add_texture(":/images/fireball.png");
     Object::add_texture(":/images/iceArrow.png");
     Object::add_texture(":/images/wall.png");
+    Object::add_texture(":/images/wizard.png");
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Game");
-    Hero hero(":/images/wizard.png");
-    hero.set_position(24,48);
-    hero.set_speed(0.7);
     Map map;
     map.set_level(1);
+    Hero *hero = new Hero(map);
+    hero->set_position(24,48);
+    hero->set_speed(0.7);
+
     while (window.isOpen()) {
         std::this_thread::sleep_for(std::chrono::milliseconds(1000/60));
         sf::Event event{};
@@ -24,11 +26,8 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        hero.update();
         window.clear();
         map.draw(window);
-        window.draw(hero.Sprite());
-        hero.draw_projectiles(window);
         window.display();
     }
     return 0;

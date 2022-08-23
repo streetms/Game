@@ -7,12 +7,14 @@
 #include <forward_list>
 #include <SFML/Graphics.hpp>
 #include "Projectile.h"
+#include "Map.h"
 class Creature : public Object{
 public:
-    Creature(std::string_view path);
     void draw_projectiles(sf::RenderWindow& window);
     virtual void shot(Projectile::Type type);
+    explicit Creature(Map& map);
 protected:
+    Map* map_;
     int height;
     int max_height;
     bool life;
