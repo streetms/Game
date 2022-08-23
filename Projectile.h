@@ -13,12 +13,12 @@ private:
     void iceArrow();
 public:
     enum class Type {fireball,iceArrow};
+    bool operator ==(const Projectile& other);
     Type type;
     Projectile(Type type, Object* parent);
     void update() override;
     const int sprite_width = 96;
     const int sprite_height = 48;
-    std::pair <int,int> Size() override;
 };
 
 

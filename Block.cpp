@@ -9,6 +9,4 @@ Block::Block(std::string_view path) : Object(path) {
 }
 
 Block::Block(){
-    solid = true;
-
 }

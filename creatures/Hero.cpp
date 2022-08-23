@@ -1,7 +1,6 @@
 //
 // Created by konstantin on 20.08.22.
 //
-#include <memory>
 #include "creatures/Hero.h"
 Hero::Hero(std::string_view path) : Creature(path){
     sprite.setOrigin(sprite_width/2,sprite_height/2);
@@ -13,29 +12,25 @@ Hero::Hero(std::string_view path) : Creature(path){
     current_frame = 0;
     speed_ = 0.5;
     state = State::move_right;
-    solid = true;
-    weighty = true;
-    vulnerability = true;
 }
 void Hero::update() {
+    current_frame += speed_ / 2;
     if (state == State::move_right)
         sprite.setTextureRect(sf::Rect(50,120,96,128));
     else
         sprite.setTextureRect(sf::Rect(146,120,-96,128));
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
         _x-=speed_;
-        current_frame += speed_ / 2;
         sprite.setTextureRect(move_left_frame[static_cast<int>(current_frame)%move_right_frame.size()]);
-        sprite.setPosition(_x,_y);
         state = State::move_left;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         _x+=speed_;
-        current_frame += speed_ / 2;
         sprite.setTextureRect(move_right_frame[static_cast<int>(current_frame)%move_right_frame.size()]);
-        sprite.setPosition(_x,_y);
         state = State::move_right;
     }
+    sprite.setPosition(_x,_y);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
         this->shot(Projectile::Type::fireball);
     }
@@ -43,9 +38,4 @@ void Hero::update() {
         this->shot(Projectile::Type::iceArrow);
     }
 }
-
-std::pair<int, int> Hero::Size() {
-    return {sprite_width,sprite_height};
-}
-
 

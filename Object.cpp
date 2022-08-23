@@ -5,14 +5,12 @@
 #include "Object.h"
 std::map<std::string_view,sf::Texture> Object::textures;
 
-void Object::fell() {
-
-}
-
-Object::State Object::get_state() {
+Object::State Object::get_state() const {
     return state;
 }
-
+std::pair <int,int> Object::Size() const {
+  return {sprite_width,sprite_height};
+}
 Object::Object(std::string_view path){
     if (not path.empty()) {
         if (textures.find(path) == textures.end()) {
@@ -23,18 +21,10 @@ Object::Object(std::string_view path){
     }
 }
 
-bool Object::is_weighty() {
-    return weighty;
-}
-
-bool Object::is_solid() {
-    return solid;
-}
-
-std::pair<float, float> Object::Position() {
+std::pair<float, float> Object::Position() const {
     return std::pair{_x,_y};
 }
-sf::Sprite Object::Sprite() {
+sf::Sprite Object::Sprite() const {
     return sprite;
 }
 
@@ -48,7 +38,7 @@ void Object::set_speed(float speed) {
     speed_ = speed;
 }
 
-float Object::Speed(){
+float Object::Speed() const {
     return speed_;
 }
 
@@ -56,7 +46,7 @@ void Object::add_texture(std::string_view path) {
     textures.emplace(path, load_texture_from_file(path));
 }
 
-const sf::Texture &Object::get_texture(std::string_view path) {
+const sf::Texture &Object::get_texture(std::string_view path) const {
     return textures.find(path)->second;
 }
 

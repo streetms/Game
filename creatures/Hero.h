@@ -26,7 +26,6 @@ public:
     const int sprite_height = 96;
     explicit Hero(std::string_view path);
     void update() override;
-    std::pair <int,int> Size() override;
 };
 
 

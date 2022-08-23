@@ -5,7 +5,6 @@
 #ifndef GAME_CREATURE_H
 #define GAME_CREATURE_H
 #include <forward_list>
-#include <memory>
 #include <SFML/Graphics.hpp>
 #include "Projectile.h"
 class Creature : public Object{
@@ -19,7 +18,7 @@ protected:
     bool life;
     float current_frame;
 private:
-    std::forward_list<std::unique_ptr<Projectile>> projectiles;
+    std::forward_list<Projectile> projectiles;
 
 };
 

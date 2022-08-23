@@ -3,13 +3,12 @@
 //
 #include "Object.h"
 #include "Projectile.h"
-#include <iostream>
 Projectile::Projectile(Type type, Object* parent) {
     sprite.setOrigin(sprite_width/2,sprite_height/2);
     parent_ = parent;
     std::tie(_x,_y) = parent_->Position();
     auto [x,y] = parent_->Size();
-    _y += y / 4;
+    _y += y / 2;
     state = parent_->get_state();
     speed_ = parent_->Speed()*6;
     if (parent->get_state() == State::move_right) {
@@ -33,10 +32,6 @@ void Projectile::update() {
     sprite.setPosition(_x,_y);
 }
 
-std::pair<int, int> Projectile::Size() {
-    return {sprite_width,sprite_height};
-}
-
 void Projectile::fireball() {
     sprite.setTexture(get_texture(":/images/fireball.png"));
     if (state == State::move_right) {
@@ -57,4 +52,8 @@ void Projectile::iceArrow() {
         sprite.setTextureRect(sf::Rect(144,0,-144,48));
     }
     sprite.setScale(96./144, 48./48);
+}
+
+bool Projectile::operator==(const Projectile &other) {
+    return other.state == this->state and other.Size() == this->Size() and this->Position() == other.Position() and this->type == other.type;
 }
